@@ -7,7 +7,7 @@ use strict;
 
 my %h;
 while (chomp(my $word = <>)) {
-    push (@{$h{join('', digest($word))}}, $word);
+    push (@{$h{digest($word)}}, $word);
 }
 print map { @$_ > 1 ? "@$_\n" : () } values %h;
 
@@ -15,5 +15,5 @@ print map { @$_ > 1 ? "@$_\n" : () } values %h;
 # see the replacement digest idea in "anagram.c"
 sub digest {
     my $word = shift;
-    return sort(split(//, $word));
+    return join('', sort(split(//, $word)));
 }

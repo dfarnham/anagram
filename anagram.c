@@ -38,11 +38,9 @@ digest(char *word) {
         int nextState = table[state] ^ state;
 
         // mask to clear the 2 bits in "digest" representing the current state
-        //long unsigned mask = 0xffffffffffffffff ^ 3 << shift;
-        long unsigned mask = ~0 ^ 3 << shift;
+        long mask = ~(3 << shift);
 
         // replace the 2 bits in "digest" with the new state
-        // d = (d &  (~0 ^ 3 << shift))  |  (table[(d >> shift) & 3] ^ ((d >> shift) & 3)) << shift;
         d = (d & mask) | (nextState << shift);
     }
     return d;
